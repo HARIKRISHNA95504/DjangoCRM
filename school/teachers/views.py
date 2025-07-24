@@ -25,3 +25,23 @@ def add_teacher(request):
         teacher.save() 
         return redirect("all-teachers")
     return render(request,"index.html")
+
+def update_teacher(request,id):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        subject = request.POST.get("subject")
+        contact = request.POST.get("contact")
+        email = request.POST.get("email")
+        image = request.FILES.get("image")
+
+        teacher = Teacher(
+            id = id,
+            name = name,
+            subject = subject,
+            contact = contact,
+            email = email,
+            image = image if image else None
+        )
+        teacher.save()
+        return redirect("all-teachers")
+    return render(request,"index.html",{'teacher':teacher})

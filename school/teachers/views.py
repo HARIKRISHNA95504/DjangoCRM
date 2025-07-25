@@ -45,3 +45,9 @@ def update_teacher(request,id):
         teacher.save()
         return redirect("all-teachers")
     return render(request,"index.html",{'teacher':teacher})
+
+def delete_teacher(request,id):
+    teacher = Teacher.objects.filter(id=id)
+    teacher.delete()
+
+    return redirect("all-teachers")
